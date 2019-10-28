@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_110021) do
+ActiveRecord::Schema.define(version: 2019_10_24_132634) do
 
   create_table "bill_details", force: :cascade do |t|
     t.decimal "price"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2019_10_21_110021) do
 
   create_table "cashflows", force: :cascade do |t|
     t.decimal "bill_total"
+    t.decimal "cost_total"
+    t.decimal "net_profit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_110021) do
   create_table "reservations", force: :cascade do |t|
     t.integer "table_number"
     t.integer "guest_number"
+    t.datetime "book_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,6 +62,8 @@ ActiveRecord::Schema.define(version: 2019_10_21_110021) do
     t.string "name"
     t.float "hour_worked"
     t.decimal "pay_rate"
+    t.string "phone"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,6 +73,9 @@ ActiveRecord::Schema.define(version: 2019_10_21_110021) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "index"
+    t.string "password_digest"
+    t.string "phone"
   end
 
   create_table "utilities", force: :cascade do |t|
