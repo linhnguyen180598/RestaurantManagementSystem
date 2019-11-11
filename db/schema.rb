@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_122147) do
+ActiveRecord::Schema.define(version: 2019_11_05_232553) do
 
-  create_table "bill_details", force: :cascade do |t|
+  create_table "bills", force: :cascade do |t|
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2019_10_30_122147) do
 
   create_table "dish_details", force: :cascade do |t|
     t.integer "score"
-    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_10_30_122147) do
     t.string "name"
     t.integer "category"
     t.decimal "price"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,11 +51,12 @@ ActiveRecord::Schema.define(version: 2019_10_30_122147) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "table_number"
     t.integer "guest_number"
     t.datetime "book_time"
+    t.integer "reservation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_reservations_on_reservation_id"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -68,15 +69,25 @@ ActiveRecord::Schema.define(version: 2019_10_30_122147) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tables", force: :cascade do |t|
+    t.integer "capacity"
+    t.boolean "reserved", default: false
+    t.string "table_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["table_number"], name: "index_tables_on_table_number"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "index"
     t.string "password_digest"
     t.string "phone"
     t.string "remember_digest"
+    t.boolean "admin", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email"
   end
 
   create_table "utilities", force: :cascade do |t|

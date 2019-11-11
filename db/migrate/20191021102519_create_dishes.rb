@@ -4,6 +4,7 @@ class CreateDishes < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :category
       t.decimal :price
+      t.string :description
 
       t.timestamps
     end

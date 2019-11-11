@@ -1,4 +1,4 @@
 class DishDetail < ApplicationRecord
-  has_one :dish
-  belongs_to :bill_detail
+  belongs_to :user
+  belongs_to :dish
 end

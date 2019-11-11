@@ -1,11 +1,10 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
-  has_many :reservations, foreign_key: "reservation_id", dependent: :destroy
-  has_many :bill_details
-  has_many :dish_details, through: :bill_details
+  has_one :bill_detail
+  has_many :dishes, through: :dish_details
+  has_many :tables, through: :reservations, dependent: :destroy
+  has_many :reservations
 
-  has_many :microposts, dependent: :destroy
-  #attr_accessor :remember_token
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
