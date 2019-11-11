@@ -1,9 +1,9 @@
 class CreateReservations < ActiveRecord::Migration[5.2]
   def change
     create_table :reservations do |t|
-      t.string :table_number
       t.integer :guest_number
       t.datetime :book_time
+      t.integer :reservation_id, index: true
 
       t.timestamps
     end
