@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'faker',          '1.7.3'
 gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
-gem 'bootstrap', '~> 4.3.1'
+#gem 'bootstrap', '~> 4.3.1'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

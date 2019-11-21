@@ -2,8 +2,9 @@ class User < ApplicationRecord
   attr_accessor :remember_token
   has_one :bill_detail
   has_many :dishes, through: :dish_details
-  has_many :tables, through: :reservations, dependent: :destroy
+  has_many :tables, through: :reservations
   has_many :reservations
+  has_many :comments, dependent: :destroy
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -17,7 +18,7 @@ class User < ApplicationRecord
                     format: { with: VALID_PHONE_REGEX }
   
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 },allow_nil: true
 
   # Returns the hash digest of the given string.
   def User.digest(string)
