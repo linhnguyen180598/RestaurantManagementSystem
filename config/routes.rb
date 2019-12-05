@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     resources :bills
     resources :menus
   end
-end
 
 
   post '/give_admin',  to: 'users#give_admin'
