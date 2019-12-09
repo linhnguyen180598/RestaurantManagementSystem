@@ -2,9 +2,9 @@ class User < ApplicationRecord
   attr_accessor :remember_token
   has_one :bill_detail
   has_many :dishes, through: :dish_details
-  has_many :tables, through: :reservations
   has_many :reservations
   has_many :comments, dependent: :destroy
+
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }

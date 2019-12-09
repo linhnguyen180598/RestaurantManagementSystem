@@ -1,0 +1,29 @@
+<% provide(:title, 'Table Management')%>
+<% if @tables.empty?%>
+  <div>
+    <p> The restaurant has no Tables </p>
+  </div>
+<% else %>
+  <div>
+    <table style = "width: 100%">
+      <caption> All tables </caption>
+      <tr> 
+        <th>Table Number </th>
+        <th>Capacity </th>
+        <th>Reserved? </th>
+        <th>Delete Table</th>
+      </tr>
+      <% @tables.each do |s| %>
+        <tr> 
+          <td><%= s.table_number%></td>
+          <td><%= s.capacity%></td>
+          <td><%= s.reserved%></td>
+          <td><%= link_to "Delete", s,method: :delete %> </td>
+        </tr>
+      <% end%>
+    </table>
+  </div>
+<% end%>
+<div>  
+  <%= link_to "Create new table", new_table_path, class: "btn btn-default"%>
+</div>

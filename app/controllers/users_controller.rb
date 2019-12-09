@@ -35,11 +35,17 @@ class UsersController < ApplicationController
     end 
   end
 
+  def give_admin
+    @user = User.find(params[:id])
+    @user.update_attribute :admin, true
+    redirect_to users_path
+  end
+
   def edit 
     @user = User.find(params[:id])
   end
 
-  private
+  private  
   def user_params
     params.require(:user).permit(:name, :email, :phone, :password,
     :password_confirmation, :admin)

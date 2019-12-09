@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   post '/admin/dishes/new',  to: 'admin/dishes#create'
-  resources :users
   resources :dishes, only: [:index, :show] do
     resources :comments, only: [:create, :destroy]
   end
@@ -25,5 +24,12 @@ Rails.application.routes.draw do
     resources :bills
     resources :menus
   end
-end
 
+
+  post '/give_admin',  to: 'users#give_admin'
+  get '/reservation_table', to: 'tables#reservation_table'
+  post '/reservation_table', to: 'tables#assign_table'
+
+  resources :users , :reservations, :tables
+end
+  

@@ -1,9 +1,7 @@
 class Table < ApplicationRecord
-  has_many :users, through: :reservations
+  has_many :users
   has_many :reservations
-  
-  def reserved?
-    reservations.present?
-  end
 
+  validates :table_number, uniqueness: true
+  validates :capacity, numericality: {only_integer: true}
 end

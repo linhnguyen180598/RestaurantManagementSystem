@@ -16,3 +16,30 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$( document ).on('turbolinks:load', function() {
+  $(".js-selectTableId").change(function(){
+    var table_id = $(this).val();
+    var reservation_id = $(this).attr('data-reservation-id');
+    $.ajax({
+      method: "POST",
+      url: "/reservation_table",
+      data: { table_id: table_id, reservation_id: reservation_id }
+    }).done(function() {
+      console.log( "Data Saved! " );
+    });
+  }); 
+});
+
+// $( document ).on
+//   ('turbolinks:load', function() {
+//     $(".js-unassignTableId").change(function() {
+//     var reserved = $(this).val()
+//     var reservation_id = $(this).attr('data-reservation-id')
+//     $.ajax({
+//       method: "POST"
+//       url: "/reservation_table"
+//       data: {reserved:}
+//     })
+//   }
+// }
