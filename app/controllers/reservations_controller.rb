@@ -1,28 +1,55 @@
 class ReservationsController < ApplicationController
-  before_action :correct_user, only: [:index, :show, :create, :update, :destroy]
+  protect_from_forgery
+  before_action :load_reservation, only: [:edit, :show,:update]
   
-  def index
-    @reservations = Post.all.order(:book_time)
-  end
-
-  def show
-    @reservation = Reservation.find(params[:id])
-  end 
-
-  def create
-    @reservation = Reservation.new(reservation_params)
-    if Table.reserved? == false 
-      @reservation.save
-    else @reservation.destroy , render 'new'
-    end
-  end
-
   def new
     @reservation = Reservation.new
   end
- 
-  private  
-  def reservation_params
-    params.require(:reservation).permit(:guest_number, :book_time)
+
+  def index
+    @reservations = Reservation.where(user_id: current_user.id)
+    @all_reservations = Reservation.all.order(:book_time)
+  end
+
+  def create
+    @reservation = Reservation.new(reservation_params)
+    @reservation.user_id = current_user.id
+    if @reservation.save 
+      flash[:success] = " ok"
+      redirect_to @reservation
+    else
+      flash.now[:danger] = "not ok"
+      render 'new'
+    end
+  end
+
+  def show
   end 
+
+  def edit 
+  end
+
+  def destroy
+    Reservation.find(params[:id]).destroy
+    flash[:success] = "ok"
+    redirect_to reservations_path
+  end
+
+  def update 
+    if @reservation.update_attributes(reservation_params)
+      flash[:success] = "Reservation updated"
+      redirect_to @reservation
+    else
+      render 'edit'
+    end
+  end
+ 
+  private 
+  def reservation_params
+    params.require(:reservation).permit(:guest_number,:book_time,:user_id)
+  end
+
+  def load_reservation
+    @reservation = Reservation.find(params[:id])
+  end
 end

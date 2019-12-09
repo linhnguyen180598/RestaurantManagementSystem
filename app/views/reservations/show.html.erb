@@ -1,0 +1,16 @@
+<% provide(:title, 'Your reservation')%>
+<div>
+    <table style = "width: 100%">
+      <caption> Your reservation </caption>
+      <tr> 
+        <th>So khach </th>
+        <th>Thoi gian</th>
+        <th>Xoa dat ban </th>
+      </tr>
+      <tr> 
+          <td><%= @reservation.guest_number%></td>
+          <td><%= @reservation.book_time%></td>
+          <td><%= link_to "Delete", method: :delete%>
+      </tr>
+    </table>
+  </div>

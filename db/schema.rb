@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2019_12_07_160303) do
 
   create_table "bills", force: :cascade do |t|
     t.decimal "price"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -22,6 +23,10 @@ ActiveRecord::Schema.define(version: 2019_12_07_160303) do
     t.decimal "bill_total"
     t.decimal "cost_total"
     t.decimal "net_profit"
+    t.integer "bill_id"
+    t.integer "ingredient_id"
+    t.integer "utility_id"
+    t.integer "staff_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,6 +43,9 @@ ActiveRecord::Schema.define(version: 2019_12_07_160303) do
 
   create_table "dish_details", force: :cascade do |t|
     t.integer "score"
+    t.integer "dish_id"
+    t.integer "user_id"
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,6 +55,7 @@ ActiveRecord::Schema.define(version: 2019_12_07_160303) do
     t.integer "category"
     t.decimal "price"
     t.string "description"
+    t.integer "bill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,10 +78,12 @@ ActiveRecord::Schema.define(version: 2019_12_07_160303) do
   create_table "reservations", force: :cascade do |t|
     t.integer "guest_number"
     t.datetime "book_time"
-    t.integer "reservation_id"
+    t.integer "user_id"
+    t.integer "table_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["reservation_id"], name: "index_reservations_on_reservation_id"
+    t.index ["table_id"], name: "index_reservations_on_table_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "staffs", force: :cascade do |t|

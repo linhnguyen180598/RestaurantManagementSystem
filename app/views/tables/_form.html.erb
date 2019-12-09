@@ -1,0 +1,16 @@
+<div class= "section">
+  <%= form_for @table do |f|%>
+    <%= render 'shared/error_messages', object: f.object %>
+      <div>
+        <%= f.label 'Ban so may' %>
+        <%= f.text_field :table_number, class: 'form_control' %> 
+      </div>
+      <div>
+        <%= f.label 'So cho ngoi' %>
+        <%= f.text_field :capacity, class: 'form_control' %> 
+      </div>
+      <div>  
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+  <% end %>
+</div>  

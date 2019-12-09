@@ -1,0 +1,21 @@
+<div class= "section">
+  <%= form_for @reservation do |f|%>
+    <%= render 'shared/error_messages', object: f.object %>
+      <div>
+        <%= f.label 'Ban di bao nhieu nguoi ?' %>
+        <%= f.text_field :guest_number, class: 'form_control' %> 
+      </div>
+      <div>
+        <%= f.label 'Chon ngay gio' %>   
+        <%= f.datetime_select :book_time, 
+                              minute_step: 30, start_hour: 10, end_hour: 22 , 
+                              start_year: Date.current.year, end_year:  Date.current.year, 
+                              start_day: Date.current.day, end_day: Date.current.day + 7,
+                              order: [:day, :month, :year] ,class: 'form_control' %>
+      </div>
+      <div>  
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+  <% end %>
+</div>  
+

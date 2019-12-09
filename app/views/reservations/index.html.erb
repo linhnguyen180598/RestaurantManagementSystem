@@ -1,0 +1,55 @@
+<% provide(:title, 'All of your reservation')%>
+<% if current_user.admin?%>
+  <div>
+    <table style = "width: 100%">
+      <caption> All reservations </caption>
+      <tr> 
+        <th>Book time </th>
+        <th>Guest number </th>
+        <th>Name </th>
+        <th>User ID </th>
+        <th>Xoa ban</th>
+      </tr>
+      <% @all_reservations.each do |s| %>
+        <tr> 
+          <td><%= s.book_time%></td>
+          <td><%= s.guest_number%></td>
+          <td><%= s.user.name%>
+          <td><%= s.user_id%></td>
+          <td><%= link_to "Delete", s,method: :delete %> </td>
+        </tr>
+      <% end%>
+    </table>
+  </div>
+<div>  
+  <%= link_to "Create new reservation", new_reservation_path, class: "btn btn-default"%>
+</div>
+<% else %>
+ <% if @reservations.empty?%>
+    <div>
+      <p> You haven't any reservation </p>
+    </div>
+  <% else %>
+    <div>
+      <table style = "width: 100%">
+        <caption> All your reservations </caption>
+        <tr> 
+          <th>Thoi gian dat </th>
+          <th>So khach </th>
+          <th>Xoa ban</th>
+        </tr>
+        <% @reservations.each do |s| %>
+          <tr> 
+            <td><%= s.book_time%></td>
+            <td><%= s.guest_number%></td>
+            <td><%= link_to "Delete", s,method: :delete %> </td>
+          </tr>
+        <% end%>
+      </table>
+    </div>
+<%end%>
+<div>  
+  <%= link_to "Create new reservation", new_reservation_path, class: "btn btn-default"%>
+</div>
+<%end%>
+

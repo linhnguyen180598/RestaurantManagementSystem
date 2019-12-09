@@ -1,0 +1,48 @@
+<% provide(:title, 'Assigning Reservation')%>
+  <div>
+    <table style = "width: 100%">
+      <caption> Existing Reservation </caption>
+      <tr> 
+        <th>Customer name </th>
+        <th>Guest Number </th>
+        <th>Book time</th>
+        <th>Table </th>
+        <%# <th>Unassign reservation </th> %>
+      </tr>
+        <%@existing_reservations.each do |r|%>
+        <tr>
+          <td><%= r.user.name %></td>
+          <td><%= r.guest_number %></td>
+          <td><%= r.book_time %></td>
+          <td><%= r.table.table_number %></td>
+          <%# <td><%= link_to "Unassign", method: :unassign_table, class: "js-unassignTableId", data: {reservation_id: r.id}%> 
+          <%end%>
+        </tr>
+    </table>
+  </div>
+  <div>
+    <p>
+    </p>
+    <p>
+    </p>
+  </div>
+  <div>
+    <table style = "width: 100%">
+      <caption> Assign Reservation </caption>
+      <tr> 
+        <th>Customer name </th>
+        <th>Guest Number </th>
+        <th>Book time</th>
+        <th>Table + Capacity </th>
+      </tr>
+      <%@empty_reservations.each do |r|%>
+        <tr>
+          <td><%= r.user.name%></td>
+          <td><%= r.guest_number%></td>
+          <td><%= r.book_time%></td>
+          <td><%= select_tag "Table", options_for_select(@empty_tables.collect{ |u| [u.table_number.to_s + " : " + u.capacity.to_s, u.id] }), 
+            multiple: false, class: "js-selectTableId", data: { reservation_id: r.id } %></td>
+          <%end%>
+        </tr>
+    </table>
+  </div>
