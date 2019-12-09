@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   
   def index
-    @users = User.all
+    @users = User.all.paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -27,19 +27,21 @@ class UsersController < ApplicationController
 
   def update
     @user  = User.find(params[:id])
-    if @user.update_attribute(user_params)
+    if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
-    else render 'edit'
+      redirect_to @user
+    else 
+      render 'edit'
     end 
   end
 
   def edit 
     @user = User.find(params[:id])
-  end 
+  end
 
   private
   def user_params
     params.require(:user).permit(:name, :email, :phone, :password,
-                                   :password_confirmation)
+    :password_confirmation, :admin)
   end
 end

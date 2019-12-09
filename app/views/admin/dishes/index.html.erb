@@ -1,0 +1,27 @@
+<% provide(:title, 'Menu') %>
+<h1>All Dish</h1>
+
+<div>
+  <table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Description</th>
+    </tr>
+    <% @dishes.each do |dish| %>
+      <tr>
+        <th> <a href="<%= admin_dish_path(dish.id) %>"> <%= dish.name %></a> </th>
+        <th><%= dish.price %></th>
+        <th><%= dish.category %></th>
+        <th><%= dish.description %></th>
+        <td><%= link_to "Update", edit_admin_dish_path(dish.id) %> </td>
+        <td><%= link_to "delete", admin_dish_path(dish), method: :delete,
+                data: { confirm: "You sure?" } %> </td>
+      </tr>
+      <br>
+    <% end %>
+  </table>
+</div>
+
+<%= link_to "Create new dish", new_admin_dish_path, class: "btn btn-default"%>

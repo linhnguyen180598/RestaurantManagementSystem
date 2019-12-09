@@ -1,0 +1,25 @@
+<% provide(:title, @dish.name) %>
+<h1><%= @dish.name%></h1>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h2>Name: <%= @dish.name %></h2>  
+      <h2>Category: <%= @dish.category %></h2>
+      <h2>Price: <%= @dish.price %></h2>
+      <h2>Description: <%= @dish.description %></h2>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @dish.comments.any? %>
+      <h3>comments (<%= @dish.comments.count %>)</h3>
+      <ol class="comments">
+        <%= render "comments/comments", comments: @comments %>
+      </ol>
+    <% end %>
+  </div>
+
+  <div class="comment_form">
+    <%= render 'comments/comment_form' %>
+  </div>
+</div>

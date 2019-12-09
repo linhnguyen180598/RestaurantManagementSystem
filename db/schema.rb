@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_232553) do
+ActiveRecord::Schema.define(version: 2019_12_07_160303) do
 
   create_table "bills", force: :cascade do |t|
     t.decimal "price"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2019_11_05_232553) do
     t.decimal "net_profit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "user_id"
+    t.integer "dish_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_comments_on_dish_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "dish_details", force: :cascade do |t|
@@ -48,6 +58,12 @@ ActiveRecord::Schema.define(version: 2019_11_05_232553) do
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "reservations", force: :cascade do |t|

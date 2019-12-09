@@ -1,0 +1,119 @@
+<% provide(:title, 'Menu') %>
+<% provide(:button_text, 'Create Menu') %>
+<h1>Menu</h1>
+
+<%= form_for [:admin, @menu] do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :Menu_name %>
+    <%= f.text_field :name, class: 'form-control' %>
+    
+  <div>
+    <div>
+    <h2>Appetizer</h2>
+      <table>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        <% @dishes.each do |dish| %>
+          <% if dish.category == "Appetizer" %>
+          <tr>
+            <%= check_box_tag 'dish_ids[]',dish.id %>
+            <th><a href="<%= dish_path(dish.id) %>"> <%= dish.name %></a></th>
+            <th><%= dish.price %></th>
+            <th><%= dish.description %></th>
+          </tr>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+    </br>
+
+    <div>
+    <h2>Main</h2>
+      <table style="width:100%">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        <% @dishes.each do |dish| %>
+          <% if dish.category == "Main" %>
+          <tr>
+          <%= check_box_tag 'dish_ids[]',dish.id %>
+            <th><a href="<%= dish_path(dish.id) %>"> <%= dish.name %></a></th>
+            <th><%= dish.price %></th>
+            <th><%= dish.description %></th>
+          <br>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+
+    <div>
+    <h2>Drinks</h2>
+      <table style="width:100%">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        <% @dishes.each do |dish| %>
+          <% if dish.category == "Drinks" %>
+          <tr>
+            <th><a href="<%= dish_path(dish.id) %>"> <%= dish.name %></a></th>
+            <th><%= dish.price %></th>
+            <th><%= dish.description %></th>
+          <br>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+
+    <div>
+    <h2>Salad</h2>
+      <table style="width:100%">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        <% @dishes.each do |dish| %>
+          <% if dish.category == "Salad" %>
+          <tr>
+            <th><a href="<%= dish_path(dish.id) %>"> <%= dish.name %></a></th>
+            <th><%= dish.price %></th>
+            <th><%= dish.description %></th>
+          </tr>
+          <br>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+
+    <div>
+    <h2>Dessert</h2>
+      <table style="width:100%">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        <% @dishes.each do |dish| %>
+          <% if dish.category == "Dessert" %>
+          <tr>
+            <th><a href="<%= dish_path(dish.id) %>"> <%= dish.name %></a></th>
+            <th><%= dish.price %></th>
+            <th><%= dish.description %></th>
+          </tr>
+          <br>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
+

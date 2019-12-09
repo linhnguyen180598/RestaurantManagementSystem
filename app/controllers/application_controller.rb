@@ -2,11 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
   private
-  def admin_user
-    if current_user.admin?
-     flash.now[:success] = "Admin Access Granted"
-    else
-     redirect_to root_path
+  def check_admin
+    redirect_to(root_url) unless current_user.admin?
+    if !current_user.admin?
+      flash[:danger] = "Your are not admin"
     end
   end
 
